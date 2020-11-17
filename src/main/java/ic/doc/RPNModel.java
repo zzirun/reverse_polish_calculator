@@ -1,25 +1,36 @@
 package ic.doc;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
 public class RPNModel {
 
-  RPNView view;
+  private List<Updatable> views = new ArrayList<>();
 
   private Deque<Integer> nums = new ArrayDeque<>();
 
   private int result = 0;
 
-  public RPNModel() {}
+  public RPNModel() {
+  }
 
   public void addObserver(RPNView observer) {
-    view = observer;
+    // Provides mobility for alternate views
+    views.add(observer);
+  }
+
+  public void notifyObservers() {
+    for (Updatable view : views) {
+      view.update(this);
+    }
   }
 
   public void addToDeque(int num) {
     nums.add(num);
+    result = num;
+    notifyObservers();
   }
 
   public void arithmetic(int startingValue, boolean plus) {
@@ -36,7 +47,7 @@ public class RPNModel {
       }
     }
     nums.add(result);
-//    view.update();
+    notifyObservers();
   }
 
   public void plus() {
@@ -54,6 +65,7 @@ public class RPNModel {
   public void reset() {
     nums.clear();
     result = 0;
+    notifyObservers();
   }
 
   public int getResult() {

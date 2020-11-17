@@ -6,7 +6,27 @@ import java.awt.event.ActionListener;
 public class RPNController {
 
   private RPNModel calculationResult = new RPNModel();
-  private RPNView calculatorInterface = new RPNView();
+  private RPNView calculatorInterface = new RPNView(this, calculationResult);
+
+  public RPNController() {
+    calculationResult.addObserver(calculatorInterface);
+  }
+
+  public ActionListener getNumController(int i) {
+    return new numController(i);
+  }
+
+  public ActionListener getPlusController() {
+    return new plusController();
+  }
+
+  public ActionListener getMinusController() {
+    return new minusController();
+  }
+
+  public ActionListener getResetController() {
+    return new resetController();
+  }
 
   class numController implements ActionListener {
 
@@ -41,6 +61,10 @@ public class RPNController {
     public void actionPerformed(ActionEvent actionEvent) {
       calculationResult.reset();
     }
+  }
+
+  public static void main(String args[]) {
+    new RPNController();
   }
 
 }
