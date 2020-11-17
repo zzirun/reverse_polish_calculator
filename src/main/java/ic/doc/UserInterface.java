@@ -3,36 +3,39 @@ package ic.doc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUIApp {
+public class UserInterface {
 
   private Calculator calculator = new Calculator();
   private Display calculatorInterface = new Display(this);
 
-  public GUIApp() {
+  public UserInterface() {
     calculator.addObserver(calculatorInterface);
   }
 
   public ActionListener getNumController(int i) {
-    return new numController(i);
+    return new NumController(i);
   }
 
   public ActionListener getPlusController() {
-    return new plusController();
+    return new PlusController();
   }
 
   public ActionListener getMinusController() {
-    return new minusController();
+    return new MinusController();
   }
 
   public ActionListener getResetController() {
-    return new resetController();
+    return new ResetController();
   }
 
-  class numController implements ActionListener {
+  // We have decided to keep controller classes as inner classes for access to Calculator class
+  // without violating encapsulation
+
+  class NumController implements ActionListener {
 
     int num;
 
-    public numController(int num) {
+    public NumController(int num) {
       this.num = num;
     }
 
@@ -42,29 +45,29 @@ public class GUIApp {
     }
   }
 
-  class plusController implements ActionListener {
+  class PlusController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
       calculator.plus();
     }
   }
 
-  class minusController implements ActionListener {
+  class MinusController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
       calculator.minus();
     }
   }
 
-  class resetController implements ActionListener {
+  class ResetController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
       calculator.reset();
     }
   }
 
-  public static void main(String args[]) {
-    new GUIApp();
+  public static void main(String[] args) {
+    new UserInterface();
   }
 
 }

@@ -9,12 +9,14 @@ public class Display implements Updatable {
 
   JTextField textField = new JTextField("0", 10);
 
-  public Display(GUIApp mainController) {
+  public Display(UserInterface mainController) {
 
     JFrame frame = new JFrame("Reverse Polish Calculator");
     frame.setSize(300, 200);
 
     JPanel panel = new JPanel();
+
+    textField.setHorizontalAlignment(JTextField.CENTER);
 
     //adding buttons for numbers up to the limit
     int limit = 10;
