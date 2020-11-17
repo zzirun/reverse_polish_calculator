@@ -5,10 +5,9 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-
 public class RPNTest {
 
-  RPNModel model = new RPNModel(new RPNView());
+  RPNModel model = new RPNModel();
 
   private void populateNormal() {
     model.addToDeque(1);
@@ -102,6 +101,18 @@ public class RPNTest {
     model.addToDeque(6);
     model.plus();
     assertThat(model.getResult(), is(2));
+  }
+
+  @Test
+  public void resetSetsResultToZero() {
+    populateNormal();
+    model.plus();
+    model.addToDeque(8);
+    model.minus();
+    model.addToDeque(7);
+    model.minus();
+    model.reset();
+    assertThat(model.getResult(), is(0));
   }
 
 

@@ -2,17 +2,20 @@ package ic.doc;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
 
 public class RPNModel {
 
-  private final RPNView view;
+  RPNView view;
 
-  private Deque<Integer> nums = new ArrayDeque<Integer>();
+  private Deque<Integer> nums = new ArrayDeque<>();
 
   private int result = 0;
 
-  public RPNModel(RPNView view) {
-    this.view = view;
+  public RPNModel() {}
+
+  public void addObserver(RPNView observer) {
+    view = observer;
   }
 
   public void addToDeque(int num) {
@@ -48,8 +51,15 @@ public class RPNModel {
     arithmetic(startingValue, false);
   }
 
+  public void reset() {
+    nums.clear();
+    result = 0;
+  }
+
   public int getResult() {
     return result;
   }
+
+
 
 }
