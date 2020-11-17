@@ -5,7 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-public class RPNTest {
+public class CalculatorTest {
 
   Calculator model = new Calculator();
 
