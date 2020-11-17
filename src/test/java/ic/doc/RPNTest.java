@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class RPNTest {
 
-  RPNModel model = new RPNModel();
+  Calculator model = new Calculator();
 
   private void populateNormal() {
     model.addToDeque(1);
@@ -18,6 +18,12 @@ public class RPNTest {
     model.addToDeque(4);
     model.addToDeque(5);
     model.addToDeque(10);
+  }
+
+  @Test
+  public void addingToDequeChangesResult() {
+    populateNormal();
+    assertThat(model.getResult(), is(10));
   }
 
   @Test

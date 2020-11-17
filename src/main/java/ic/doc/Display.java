@@ -1,21 +1,15 @@
 package ic.doc;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class RPNView implements Updatable {
-
-  private RPNModel calculationResult;
+public class Display implements Updatable {
 
   JTextField textField = new JTextField("0", 10);
 
-  public RPNView (RPNController mainController, RPNModel calculationResult) {
-
-    this.calculationResult = calculationResult;
+  public Display(GUIApp mainController) {
 
     JFrame frame = new JFrame("Reverse Polish Calculator");
     frame.setSize(300, 200);
@@ -53,7 +47,7 @@ public class RPNView implements Updatable {
   }
 
   @Override
-  public void update(RPNModel model) {
+  public void update(Calculator model) {
     textField.setText(String.valueOf(model.getResult()));
   }
 }

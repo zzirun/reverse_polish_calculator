@@ -3,13 +3,13 @@ package ic.doc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RPNController {
+public class GUIApp {
 
-  private RPNModel calculationResult = new RPNModel();
-  private RPNView calculatorInterface = new RPNView(this, calculationResult);
+  private Calculator calculator = new Calculator();
+  private Display calculatorInterface = new Display(this);
 
-  public RPNController() {
-    calculationResult.addObserver(calculatorInterface);
+  public GUIApp() {
+    calculator.addObserver(calculatorInterface);
   }
 
   public ActionListener getNumController(int i) {
@@ -38,33 +38,33 @@ public class RPNController {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-      calculationResult.addToDeque(num);
+      calculator.addToDeque(num);
     }
   }
 
   class plusController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-      calculationResult.plus();
+      calculator.plus();
     }
   }
 
   class minusController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-      calculationResult.minus();
+      calculator.minus();
     }
   }
 
   class resetController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-      calculationResult.reset();
+      calculator.reset();
     }
   }
 
   public static void main(String args[]) {
-    new RPNController();
+    new GUIApp();
   }
 
 }

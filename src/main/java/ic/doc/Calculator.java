@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-public class RPNModel {
+public class Calculator {
 
   private List<Updatable> views = new ArrayList<>();
 
@@ -13,10 +13,10 @@ public class RPNModel {
 
   private int result = 0;
 
-  public RPNModel() {
+  public Calculator() {
   }
 
-  public void addObserver(RPNView observer) {
+  public void addObserver(Display observer) {
     // Provides mobility for alternate views
     views.add(observer);
   }

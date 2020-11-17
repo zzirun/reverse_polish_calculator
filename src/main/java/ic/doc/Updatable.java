@@ -2,6 +2,6 @@ package ic.doc;
 
 public interface Updatable {
 
-  public void update (RPNModel model);
+  public void update (Calculator model);
 
 }
