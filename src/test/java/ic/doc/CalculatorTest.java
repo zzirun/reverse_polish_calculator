@@ -34,20 +34,17 @@ public class CalculatorTest {
   }
 
   @Test
-  public void addSumsAllOperands() {
-    // We have chosen to sum all operands when multiple operands are entered before +,
-    // as this would be more convenient (requiring less button presses) for multiple additions.
-    // We assume that the user did not accidentally enter more than one number, and would not
-    // require an error message.
+  public void addSumsTwoMostRecentOperands() {
     populateMultiple();
     model.plus();
-    assertThat(model.getResult(), is(19));
+    assertThat(model.getResult(), is(15));
   }
 
   @Test
   public void multipleNormalAdds() {
     populateNormal();
     model.plus();
+    assertThat(model.getResult(), is(11));
     model.addToDeque(8);
     model.plus();
     assertThat(model.getResult(), is(19));
@@ -62,7 +59,7 @@ public class CalculatorTest {
   @Test
   public void addDoesNothingWithOneOperand() {
     model.addToDeque(4);
-    model.minus();
+    model.plus();
     assertThat(model.getResult(), is(4));
   }
 
@@ -74,13 +71,10 @@ public class CalculatorTest {
   }
 
   @Test
-  public void minusSubtractsSubsequentOperandsFromFirstOperand() {
-    // We have chosen to subtract all subsequent operands from the first (e.g. 4 - 5 - 6) when
-    // the user enters more than 2 operands in a subtract operation. This is also for convenience
-    // (less button presses), and because we assume that the user didn't accidentally enter it.
+  public void minusSubtractsMostRecentOperandFromSecondMostRecentOperand() {
     populateMultiple();
     model.minus();
-    assertThat(model.getResult(), is(-11));
+    assertThat(model.getResult(), is(-5));
   }
 
   @Test
@@ -90,10 +84,10 @@ public class CalculatorTest {
   }
 
   @Test
-  public void subtractDoesNothingWithOneOperand() {
+  public void subtractNegatesOperandWithOneOperand() {
     model.addToDeque(4);
     model.minus();
-    assertThat(model.getResult(), is(4));
+    assertThat(model.getResult(), is(-4));
   }
 
   @Test

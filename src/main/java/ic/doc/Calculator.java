@@ -33,16 +33,24 @@ public class Calculator {
     notifyObservers();
   }
 
-  public void arithmetic(int startingValue, boolean plus) {
-    result = startingValue;
-    int size = nums.size();
-    if (size > 0) {
-      for (int i = 0; i < size; i++) {
-        //accounts for case where user enters more than 2 numbers to be processed
+  public void arithmetic(boolean plus) {
+    // We have chosen to operate on the two most recent operands
+    // if more than 2 operands have been entered before the operation.
+    // For example,
+    // 9 8 7 + = (8 + 7) = 15, and 9 8 7 + + = (9 + (8 + 7)) = 24,
+    // 9 8 7 - = (8 - 7) = 1, and 9 8 7 - - = (9 - (8 - 7)) = 8
+    result = 0;
+    if (nums.size() > 0) {
+      if (plus) {
+        result += nums.pollLast();
+      } else {
+        result -= nums.pollLast();
+      }
+      if (nums.size() > 0) {
         if (plus) {
-          result += nums.pollFirst();
+          result += nums.pollLast();
         } else {
-          result -= nums.pollFirst();
+          result += nums.pollLast();
         }
       }
     }
@@ -51,15 +59,11 @@ public class Calculator {
   }
 
   public void plus() {
-    arithmetic(0, true);
+    arithmetic(true);
   }
 
   public void minus() {
-    int startingValue = 0;
-    if (!nums.isEmpty()) {
-      startingValue = nums.pollFirst();
-    }
-    arithmetic(startingValue, false);
+    arithmetic(false);
   }
 
   public void reset() {
